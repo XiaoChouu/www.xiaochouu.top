@@ -16,12 +16,31 @@
                         secondary: '#8b5cf6',
                         lightText: '#666',
                         eggRed: '#FF6B6B',
-                        eggYellow: '#FFD166'  // 新增黄色主题色
+                        eggYellow: '#FFD166'
                     }
                 }
             }
         }
     </script>
+    <style>
+        /* 提示框样式 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-700 font-['Noto_Sans_SC'] leading-relaxed">
     <!-- 白底黑字的欢迎区域 -->
@@ -96,12 +115,26 @@
         </div>
     </div>
 
+    <!-- 提示信息框 -->
+    <div id="toast" class="toast"></div>
+
     <footer class="text-center py-6 text-lightText text-xs">
         <a href="#" class="no-underline hover:underline">主站：www.xiaochouu.top</a> | 
         <a href="https://eggyparty.xiaochouu.top" class="no-underline hover:underline">蛋仔派对赛季视频下载：eggyparty.xiaochouu.top</a> | 
     </footer>
 
     <script>
+        // 显示提示信息
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+
         // 动态生成23个赛季内容
         const generateSeasonCards = () => {
             const container = document.getElementById('seasonContainer');
@@ -116,18 +149,16 @@
                         <div class="p-4">
                             <h3 class="text-base text-gray-800 mb-2">S${i}</h3>
                             <div class="flex justify-between items-center gap-2">
-                                <a href="javascript:void(0);" 
-                                   onclick="previewVideo(${i})"
+                                <button onclick="previewVideo(${i})"
                                    class="flex-1 bg-eggYellow text-white py-2 px-3 rounded-full text-sm no-underline hover:bg-[#FFE08E] transition-colors text-center"
                                    style="background-color: #FFD166;">
                                     <i class="fas fa-play"></i> 预览视频
-                                </a>
-                                <a href="javascript:void(0);" 
-                                   onclick="downloadVideo(${i})"
+                                </button>
+                                <button onclick="downloadVideo(${i})"
                                    class="flex-1 bg-eggYellow text-white py-2 px-3 rounded-full text-sm no-underline hover:bg-[#FFE08E] transition-colors text-center"
                                    style="background-color: #FFD166;">
                                     <i class="fas fa-download"></i> 下载视频
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -142,20 +173,43 @@
             const video = document.getElementById('modalVideo');
             const title = document.getElementById('modalTitle');
             
+            showToast(`正在加载 S${seasonNum} 赛季视频...`);
+            
             title.textContent = `蛋仔派对 S${seasonNum}赛季视频预览`;
             video.src = `https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4`;
             modal.classList.remove('hidden');
-            video.play();
+            
+            // 添加加载事件监听
+            video.onloadeddata = function() {
+                showToast(`视频加载完成，开始播放`);
+                video.play();
+            };
+            
+            video.onerror = function() {
+                showToast(`视频加载失败，请稍后再试`);
+            };
         }
 
-        // 下载视频函数
+        // 下载视频函数 - 改进版
         function downloadVideo(seasonNum) {
-            const link = document.createElement('a');
-            link.href = `https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4`;
-            link.download = `蛋仔派对_S${seasonNum}赛季视频.mp4`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            showToast(`正在准备下载 S${seasonNum} 赛季视频...`);
+            
+            // 创建一个隐藏的iframe来触发下载
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = `https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4?download=true`;
+            document.body.appendChild(iframe);
+            
+            // 设置超时检查
+            setTimeout(() => {
+                // 如果iframe仍在，说明下载可能没触发
+                if (document.body.contains(iframe)) {
+                    document.body.removeChild(iframe);
+                    // 尝试在新窗口打开
+                    window.open(`https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4`, '_blank');
+                    showToast(`已在新窗口打开视频，请右键另存为`);
+                }
+            }, 1000);
         }
 
         // 关闭模态框
