@@ -1,1 +1,174 @@
-welcome to my website
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xiaochou's website</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        lightText: '#666',
+                        eggRed: '#FF6B6B',
+                        eggYellow: '#FFD166'  // 新增黄色主题色
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-700 font-['Noto_Sans_SC'] leading-relaxed">
+    <!-- 白底黑字的欢迎区域 -->
+    <section class="h-1/4 min-h-[180px] bg-white text-center flex flex-col justify-center items-center border-b border-gray-200 px-5">
+        <h1 class="text-2xl mb-3">Welcome to My Website</h1>
+        <p class="text-lightText">?</p>
+    </section>
+
+    <!-- 个人资料 -->
+    <div class="max-w-md mx-auto bg-white rounded-xl p-7 shadow-md text-center my-8">
+        <img src="icon.png" alt="头像" class="w-24 h-24 rounded-full border-2 border-primary mb-4 object-cover mx-auto">
+        <h2 class="text-lg text-primary mb-2">xiaochou</h2>
+        <p class="text-lightText text-sm mb-6">一名学生，神经病。自卑</p>
+
+        <!-- 社交链接 -->
+        <div class="flex flex-wrap justify-center gap-3 mt-5">
+            <a href="https://www.douyin.com/user/MS4wLjABAAAATHpKAyoXh-GVOcraA8tbSQME8OizTh0tRjNPx722_Tw" class="flex items-center gap-2 text-primary no-underline py-2 px-4 rounded-full border border-gray-300 bg-primary/5 text-sm hover:bg-primary/10 hover:-translate-y-1 transition-all" target="_blank">
+                <i class="fab fa-tiktok"></i>抖音
+            </a>
+            <a href="https://space.bilibili.com/3546577484384557" class="flex items-center gap-2 text-primary no-underline py-2 px-4 rounded-full border border-gray-300 bg-primary/5 text-sm hover:bg-primary/10 hover:-translate-y-1 transition-all" target="_blank">
+                <i class="fab fa-bilibili"></i>B站
+            </a>
+            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=GLQ0NkMNU9fpRlbOFUC4NaWIE0cij9c6" class="flex items-center gap-2 text-primary no-underline py-2 px-4 rounded-full border border-gray-300 bg-primary/5 text-sm hover:bg-primary/10 hover:-translate-y-1 transition-all" target="_blank">
+                <i class="fab fa-qq"></i>QQ
+            </a>
+            <a href="https://github.com/xiaochouu" class="flex items-center gap-2 text-primary no-underline py-2 px-4 rounded-full border border-gray-300 bg-primary/5 text-sm hover:bg-primary/10 hover:-translate-y-1 transition-all" target="_blank">
+                <i class="fab fa-github"></i>GitHub
+            </a>
+        </div>
+    </div>
+
+    <!-- 联系方式区域 -->
+    <div class="max-w-md mx-auto px-6 text-center mb-8">
+        <div class="mb-3 text-sm">
+            <strong class="text-primary">微信</strong>: xiaochou-lqn
+        </div>
+        <div class="text-sm">
+            <strong class="text-primary">蛋仔派对ID</strong>: 丑亦
+        </div>
+    </div>
+
+    <!-- 跳转按钮 -->
+    <div class="text-center my-8">
+        <a href="https://eggyparty.xiaochouu.top" class="bg-eggRed text-white py-3 px-7 rounded-full text-lg no-underline hover:bg-[#FFD166] transition-colors">
+            <i class="fas fa-external-link-alt"></i> 蛋仔派对赛季视频下载完整视频库
+        </a>
+    </div>
+
+    <!-- 蛋仔派对视频下载区域 -->
+    <section class="max-w-7xl mx-auto px-5 my-8">
+        <h2 class="text-center text-eggYellow text-xl mb-6" style="color: #FFD166;">
+            蛋仔派对赛季视频下载
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="seasonContainer">
+            <!-- 视频列表由JavaScript动态生成 -->
+        </div>
+    </section>
+
+    <!-- 视频预览模态框 -->
+    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg overflow-hidden w-full max-w-4xl">
+            <div class="flex justify-between items-center bg-eggYellow p-4">
+                <h3 id="modalTitle" class="text-lg font-medium"></h3>
+                <button id="closeModal" class="text-gray-700 hover:text-gray-900">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <video id="modalVideo" controls class="w-full" src=""></video>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-6 text-lightText text-xs">
+        © 2025 xiaochou's website
+    </footer>
+
+    <script>
+        // 动态生成23个赛季内容
+        const generateSeasonCards = () => {
+            const container = document.getElementById('seasonContainer');
+            
+            for (let i = 1; i <= 23; i++) {
+                const seasonCard = `
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md hover:-translate-y-2 transition-transform">
+                        <img src="https://eggyparty.xiaochouu.top/images/s${i}.png" 
+                             alt="S${i}赛季" 
+                             class="w-full h-40 object-cover border-b-4" 
+                             style="border-color: #FFD166;">
+                        <div class="p-4">
+                            <h3 class="text-base text-gray-800 mb-2">S${i}</h3>
+                            <div class="flex justify-between items-center gap-2">
+                                <a href="javascript:void(0);" 
+                                   onclick="previewVideo(${i})"
+                                   class="flex-1 bg-eggYellow text-white py-2 px-3 rounded-full text-sm no-underline hover:bg-[#FFE08E] transition-colors text-center"
+                                   style="background-color: #FFD166;">
+                                    <i class="fas fa-play"></i> 预览视频
+                                </a>
+                                <a href="javascript:void(0);" 
+                                   onclick="downloadVideo(${i})"
+                                   class="flex-1 bg-eggYellow text-white py-2 px-3 rounded-full text-sm no-underline hover:bg-[#FFE08E] transition-colors text-center"
+                                   style="background-color: #FFD166;">
+                                    <i class="fas fa-download"></i> 下载视频
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', seasonCard);
+            }
+        }
+
+        // 预览视频函数
+        function previewVideo(seasonNum) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            const title = document.getElementById('modalTitle');
+            
+            title.textContent = `蛋仔派对 S${seasonNum}赛季视频预览`;
+            video.src = `https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4`;
+            modal.classList.remove('hidden');
+            video.play();
+        }
+
+        // 下载视频函数
+        function downloadVideo(seasonNum) {
+            const link = document.createElement('a');
+            link.href = `https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4`;
+            link.download = `蛋仔派对_S${seasonNum}赛季视频.mp4`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 关闭模态框
+        document.getElementById('closeModal').addEventListener('click', function() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            
+            video.pause();
+            video.src = '';
+            modal.classList.add('hidden');
+        });
+
+        // 页面加载完成后执行
+        window.addEventListener('DOMContentLoaded', generateSeasonCards);
+    </script>
+</body>
+</html>
