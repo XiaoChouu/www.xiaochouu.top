@@ -120,7 +120,7 @@
 
     <footer class="text-center py-6 text-lightText text-xs">
         <a href="#" class="no-underline hover:underline">主站：www.xiaochouu.top</a> | 
-        <a href="https://eggyparty.xiaochouu.top" class="no-underline hover:underline">蛋仔派对赛季视频下载：eggyparty.xiaochouu.top</a> | 
+        <a href="https://eggyparty.xiaochouu.top" class="no-underline hover:underline">蛋仔派对赛季视频下载：eggyparty.xiaochouu.top</a>  
     </footer>
 
     <script>
@@ -142,7 +142,7 @@
             for (let i = 1; i <= 23; i++) {
                 const seasonCard = `
                     <div class="bg-white rounded-xl overflow-hidden shadow-md hover:-translate-y-2 transition-transform">
-                        <img src="https://eggyparty.xiaochouu.top/images/s${i}.png" 
+                        <img src="https://www.xiaochouu.top/images/s${i}.png" 
                              alt="S${i}赛季" 
                              class="w-full h-40 object-cover border-b-4" 
                              style="border-color: #FFD166;">
@@ -176,7 +176,7 @@
             showToast(`正在加载 S${seasonNum} 赛季视频...`);
             
             title.textContent = `蛋仔派对 S${seasonNum}赛季视频预览`;
-            video.src = `https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4`;
+            video.src = `https://wwww.xiaochouu.top/s${seasonNum}eggyparty.mp4`;
             modal.classList.remove('hidden');
             
             // 添加加载事件监听
@@ -197,7 +197,7 @@
             // 创建一个隐藏的iframe来触发下载
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
-            iframe.src = `https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4?download=true`;
+            iframe.src = `https://www.xiaochouu.top/s${seasonNum}eggyparty.mp4?download=true`;
             document.body.appendChild(iframe);
             
             // 设置超时检查
@@ -206,7 +206,7 @@
                 if (document.body.contains(iframe)) {
                     document.body.removeChild(iframe);
                     // 尝试在新窗口打开
-                    window.open(`https://eggyparty.xiaochouu.top/s${seasonNum}eggyparty.mp4`, '_blank');
+                    window.open(`https://www.xiaochouu.top/s${seasonNum}eggyparty.mp4`, '_blank');
                     showToast(`已在新窗口打开视频，请右键另存为`);
                 }
             }, 1000);
