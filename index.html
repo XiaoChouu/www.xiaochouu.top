@@ -184,14 +184,6 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            
-            // 方法2: 如果方法1失败，3秒后在新窗口打开
-            setTimeout(() => {
-                if(!document.querySelector('a[download]')) {
-                    showToast('正在新窗口打开视频，请右键另存为');
-                    window.open(url, '_blank');
-                }
-            }, 3000);
         }
 
         // 生成赛季卡片
@@ -201,7 +193,7 @@
             for(let i = 1; i <= 23; i++) {
                 const videoUrl = `https://www.xiaochouu.top/s${i}eggyparty.mp4`;
                 const imageUrl = `https://www.xiaochouu.top/images/s${i}.png`;
-                const filename = `蛋仔派对_S${i}赛季视频.mp4`;
+                const filename = `login_${i}.mp4`;
                 
                 const card = `
                     <div class="bg-white rounded-xl overflow-hidden shadow-md hover:-translate-y-2 transition-transform">
