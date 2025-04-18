@@ -84,6 +84,15 @@
     <!-- 视频下载区域 -->
     <section class="max-w-7xl mx-auto px-5 my-8">
         <h2 class="text-center text-eggYellow text-xl mb-6">蛋仔派对赛季视频下载</h2>
+        
+        <!-- 新增独立网盘按钮 -->
+        <div class="text-center mb-8">
+            <button onclick="showCloudPopup()"
+                    class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-full text-lg transition-colors">
+                <i class="fas fa-cloud mr-2"></i>网盘下载
+            </button>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="seasonContainer"></div>
     </section>
 
@@ -149,3 +158,47 @@
 </body>
 
 </html>
+
+
+<div class="popup fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="cloudPopup">
+    <div class="bg-white rounded-xl p-6 max-w-md w-full">
+        <h3 class="text-lg font-medium mb-4 text-center">选择云盘</h3>
+        <div class="space-y-3">
+            <button onclick="selectCloud('https://cloud.189.cn/t/yai67jIrMnqe', 'uxc4')" 
+                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded transition-colors">
+                天翼云盘（登录后保存下载，限速）
+            </button>
+            <button onclick="selectCloud('https://caiyun.139.com/m/i?2mKnFvjWcFH0w', 'a4og')" 
+                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded transition-colors">
+                中国移动网盘（推荐，不限速，但需要登录）
+            </button>
+            <button onclick="selectCloud('https://www.alipan.com/s/bgsJqpXaXHt', '无')" 
+                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded transition-colors">
+                阿里云盘（登录后保存下载）
+            </button>
+        </div>
+        <button onclick="closeCloudPopup()" 
+                class="mt-4 w-full bg-eggRed hover:bg-[#FF8E8E] text-white py-2 px-4 rounded transition-colors">
+            关闭
+        </button>
+    </div>
+</div>
+
+<script>
+    // 显示云盘选择弹窗
+    function showCloudPopup() {
+        document.getElementById('cloudPopup').classList.remove('hidden');
+    }
+
+    // 关闭云盘选择弹窗
+    function closeCloudPopup() {
+        document.getElementById('cloudPopup').classList.add('hidden');
+    }
+
+    // 选择云盘
+    function selectCloud(url, code) {
+        closeCloudPopup();
+        window.open(url, '_blank');
+        // 可以在这里添加显示分享码的逻辑
+    }
+</script>
