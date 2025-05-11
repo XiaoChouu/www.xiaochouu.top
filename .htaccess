@@ -1,0 +1,5 @@
+<FilesMatch "\.(mp4)$">
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
