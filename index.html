@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xiaochou's website</title>
+    <meta name="description" content="喵喵喵。这是小丑的网站，可以在这里查看我的个人信息与下载蛋仔派对赛季视频。">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        lightText: '#666',
+                        eggRed: '#FF6B6B',
+                        eggYellow: '#FFD166'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-700 font-['Noto_Sans_SC'] leading-relaxed">
+    <!-- 欢迎区域 -->
+    <section class="h-1/4 min-h-[180px] bg-white text-center flex flex-col justify-center items-center border-b border-gray-200 px-5">
+        <h1 class="text-2xl mb-3">Welcome to My Website</h1>
+        <p class="text-lightText">使用GitHub Pages搭建的静态网站,媒体文件都托管在GitHub上,访问加载可能有点慢</p>
+    </section>
+
+    <!-- 个人资料 -->
+    <div class="max-w-md mx-auto bg-white rounded-xl p-7 shadow-md text-center my-8">
+        <img src="https://www.xiaochouu.top/icon.png" alt="头像" class="w-24 h-24 rounded-full border-2 border-primary mb-4 object-cover mx-auto">
+        <h2 class="text-lg text-primary mb-2">xiaochou</h2>
+        <p class="text-lightText text-sm mb-6">一名学生，ISFP。丑陋，自卑。</p>
+
+        <!-- 社交链接 -->
+        <div class="flex flex-wrap justify-center gap-3 mt-5">
+            <a href="https://www.douyin.com/user/MS4wLjABAAAATHpKAyoXh-GVOcraA8tbSQME8OizTh0tRjNPx722_Tw"
+                class="flex items-center gap-2 text-primary no-underline py-2 px-4 rounded-full border border-gray-300 bg-primary/5 text-sm hover:bg-primary/10 hover:-translate-y-1 transition-all"
+                target="_blank">
+                <i class="fab fa-tiktok"></i>抖音
+            </a>
+            <a href="https://space.bilibili.com/3546577484384557"
+                class="flex items-center gap-2 text-primary no-underline py-2 px-4 rounded-full border border-gray-300 bg-primary/5 text-sm hover:bg-primary/10 hover:-translate-y-1 transition-all"
+                target="_blank">
+                <i class="fab fa-bilibili"></i>B站
+            </a>
+            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=GLQ0NkMNU9fpRlbOFUC4NaWIE0cij9c6"
+                class="flex items-center gap-2 text-primary no-underline py-2 px-4 rounded-full border border-gray-300 bg-primary/5 text-sm hover:bg-primary/10 hover:-translate-y-1 transition-all"
+                target="_blank">
+                <i class="fab fa-qq"></i>QQ
+            </a>
+            <a href="https://github.com/xiaochouu"
+                class="flex items-center gap-2 text-primary no-underline py-2 px-4 rounded-full border border-gray-300 bg-primary/5 text-sm hover:bg-primary/10 hover:-translate-y-1 transition-all"
+                target="_blank">
+                <i class="fab fa-github"></i>GitHub
+            </a>
+        </div>
+    </div>
+
+    <!-- 联系方式区域 -->
+    <div class="max-w-md mx-auto px-6 text-center mb-8">
+        <div class="mb-3 text-sm">
+            <strong class="text-primary">微信</strong>: xiaochou-lqn
+        </div>
+        <div class="mb-3 text-sm">
+            <strong class="text-primary">蛋仔派对ID</strong>: 丑亦
+        </div>
+            <div class="mb-3 text-sm">
+                <strong class="text-primary">微信公众号</strong>: 小丑u
+            </div>
+        </div>
+
+    <!-- 跳转按钮 -->
+    <div class="text-center my-8">
+        <a href="https://eggyparty.xiaochouu.top" class="bg-eggRed text-white py-3 px-7 rounded-full text-lg no-underline hover:bg-[#FF8E8E] transition-colors">
+            <i class="fas fa-external-link-alt"></i> 访问蛋仔派对赛季视频视频库
+        </a>
+    </div>
+
+    <!-- 视频下载区域 -->
+    <section class="max-w-7xl mx-auto px-5 my-8">
+        <h2 class="text-center text-eggYellow text-xl mb-6">蛋仔派对赛季视频下载</h2>
+        
+        <!-- 新增独立网盘按钮 -->
+        <div class="text-center mb-8">
+            <button onclick="showCloudPopup()"
+                    class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-full text-lg transition-colors">
+                <i class="fas fa-cloud mr-2"></i>网盘下载
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="seasonContainer"></div>
+    </section>
+
+    <footer class="text-center py-6 text-lightText text-xs">
+        <a href="#" class="no-underline hover:underline">主站：www.xiaochouu.top</a> |
+        <a href="https://eggyparty.xiaochouu.top" class="no-underline hover:underline">蛋仔派对赛季视频下载：eggyparty.xiaochouu.top</a>
+    </footer>
+
+    <script>
+        // 视频预览功能，直接打开视频
+        function previewVideo(seasonNum) {
+            const videoUrl = `https://www.xiaochouu.top/s${seasonNum}eggyparty.mp4`;
+            window.open(videoUrl, '_blank'); // 在新窗口打开视频，_blank表示新窗口，_self表示当前窗口
+        }
+
+        // 改进的下载函数
+        function downloadVideo(url, filename) {
+            // 方法1: 尝试直接下载
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 生成赛季卡片
+        function generateSeasonCards() {
+            const container = document.getElementById('seasonContainer');
+
+            for (let i = 1; i <= 23; i++) {
+                const videoUrl = `https://www.xiaochouu.top/s${i}eggyparty.mp4`;
+                const imageUrl = `https://www.xiaochouu.top/images/s${i}.png`;
+                const filename = `login_${i}.mp4`;
+
+                const card = `
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md hover:-translate-y-2 transition-transform">
+                        <img src="${imageUrl}" 
+                             alt="S${i}赛季" 
+                             class="w-full h-40 object-cover border-b-4 border-eggYellow">
+                        <div class="p-4">
+                            <h3 class="text-base text-gray-800 mb-2">S${i}</h3>
+                            <div class="flex gap-2">
+                                <button onclick="previewVideo(${i})" 
+                                        class="flex-1 bg-eggYellow hover:bg-[#FFE08E] text-white py-2 px-3 rounded-full transition-colors">
+                                    <i class="fas fa-play"></i> 预览
+                                </button>
+                                <button onclick="downloadVideo('${videoUrl}', '${filename}')" 
+                                        class="flex-1 bg-eggYellow hover:bg-[#FFE08E] text-white py-2 px-3 rounded-full transition-colors">
+                                    <i class="fas fa-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', card);
+            }
+        }
+
+        // 初始化
+        window.addEventListener('DOMContentLoaded', generateSeasonCards);
+    </script>
+</body>
+
+</html>
+
+
+<div class="popup fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="cloudPopup">
+    <div class="bg-white rounded-xl p-6 max-w-md w-full">
+        <h3 class="text-lg font-medium mb-4 text-center">选择云盘</h3>
+        <div class="space-y-3">
+            <button onclick="selectCloud('https://caiyun.139.com/m/i?2mKnFvjWcFH0w', 'a4og')" 
+                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded transition-colors">
+                中国移动网盘，访问码：a4og（推荐，不限速，但需要登录）
+            </button>
+            <button onclick="selectCloud('https://www.alipan.com/s/bgsJqpXaXHt', '无')" 
+                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded transition-colors">
+                阿里云盘（推荐，不限速，登录后保存下载）
+            </button>
+            <button onclick="selectCloud('https://www.123684.com/s/veLTjv-KNq5d', '无')" 
+            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded transition-colors">
+          123云盘（登录后下载，不登录需要付费，限速）
+        </button>
+            <button onclick="selectCloud('https://cloud.189.cn/t/yai67jIrMnqe', 'uxc4')" 
+            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded transition-colors">
+        天翼云盘，访问码uxc4（登录后转存下载，限速）
+
+</button>
+    </button>
+        </div>
+        <button onclick="closeCloudPopup()" 
+                class="mt-4 w-full bg-eggRed hover:bg-[#FF8E8E] text-white py-2 px-4 rounded transition-colors">
+            关闭
+        </button>
+    </div>
+</div>
+
+<script>
+    // 显示云盘选择弹窗
+    function showCloudPopup() {
+        document.getElementById('cloudPopup').classList.remove('hidden');
+    }
+
+    // 关闭云盘选择弹窗
+    function closeCloudPopup() {
+        document.getElementById('cloudPopup').classList.add('hidden');
+    }
+
+    // 选择云盘
+    function selectCloud(url, code) {
+        closeCloudPopup();
+        window.open(url, '_blank');
+        // 可以在这里添加显示分享码的逻辑
+    }
+</script>
+
+ //3926592002
